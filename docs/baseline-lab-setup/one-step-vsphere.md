@@ -1,4 +1,4 @@
-# One Step Foundation Deployment for VSPHERE
+# One Step Foundation Deployment for vSphere
 
 This lab can be used to deploy all three clusters included in the foundational lab setup.  You will execute a single script that calls all the scripts included in the step-by-step guides.  
 
@@ -22,7 +22,7 @@ Ensure that your copy of `params.yaml` indicates `aws` as the IaaS.
 * Configure CSI Storage Policy in vcenter per [this](../mgmt-cluster/01_install_tkg_mgmt.md) 
 * follow this [instruction](https://certbot-dns-google.readthedocs.io/en/stable/) to create GCP service account for certbot and download as `keys/certbot-gcp-service-account.json`
 * setup Okta account per [this](../mgmt-cluster/04_okta_mgmt.md)
-* retrieve TKG extensions per [this] (../mgmt-cluster/05_extensions_mgmt.md)
+* retrieve TKG extensions per [this](../mgmt-cluster/05_extensions_mgmt.md)
 
 ## Execute the Deploy All Script
 

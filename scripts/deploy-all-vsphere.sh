@@ -63,7 +63,7 @@ source ./scripts/set-env.sh
 # Management Step 9
 ./scripts/generate-and-apply-fluent-bit-yaml.sh $(yq r $PARAMS_YAML management-cluster.name)
 # Management Step 10
-./scripts/velero.sh $(yq r $PARAMS_YAML management-cluster.name)
+./scripts/velero-no-schedule.sh $(yq r $PARAMS_YAML management-cluster.name)
 
 # Workload Step 1
 ./scripts/deploy-all-workload-cluster-components-clouddns.sh

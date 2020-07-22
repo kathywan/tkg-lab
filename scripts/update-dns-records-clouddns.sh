@@ -25,17 +25,17 @@ echo "ingress_fqdn $ingress_fqdn"
 
 
 # Execute the change
+gcloud dns record-sets transaction start --zone $CLOUDDNS_HOSTED_ZONE
 existingDnsRecord=$(gcloud dns record-sets list --zone $CLOUDDNS_HOSTED_ZONE --name "${ingress_fqdn}")
 if [ ! -z "$existingDnsRecord" ]; then
     #remove existing record
     CURR_CNAME=$(gcloud dns record-sets list --zone $CLOUDDNS_HOSTED_ZONE | grep "${ingress_fqdn}" | awk '{print $4}') 
-    gcloud dns record-sets transaction start --zone $CLOUDDNS_HOSTED_ZONE
     gcloud dns record-sets transaction remove --zone $CLOUDDNS_HOSTED_ZONE --name "${ingress_fqdn}" --type ${record_type} $CURR_CNAME --ttl 300
-    gcloud dns record-sets transaction execute --zone $CLOUDDNS_HOSTED_ZONE
-    sleep 10s
+    # gcloud dns record-sets transaction execute --zone $CLOUDDNS_HOSTED_ZONE
+    # sleep 20s # needs better way here to make sure traction completed
 fi
 #Now Create new record
-gcloud dns record-sets transaction start --zone $CLOUDDNS_HOSTED_ZONE
+# gcloud dns record-sets transaction start --zone $CLOUDDNS_HOSTED_ZONE
 gcloud dns record-sets transaction add --zone $CLOUDDNS_HOSTED_ZONE --name "${ingress_fqdn}" --type ${record_type} ${hostname} --ttl 300
 gcloud dns record-sets transaction execute --zone $CLOUDDNS_HOSTED_ZONE
 

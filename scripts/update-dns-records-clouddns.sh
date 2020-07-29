@@ -10,10 +10,10 @@ ingress_fqdn=$1
 CLOUDDNS_HOSTED_ZONE=$(yq r $PARAMS_YAML gcp.cloud-dns-zone-name)
 
 IAAS=$(yq r $PARAMS_YAML iaas)
-
+echo "IAAS $IAAS"
 if [ "$IAAS" = "aws" ];
 then
-  hostname=`kubectl get svc envoy -n tanzu-system-ingress -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'`
+  hostname=`kubectl get svc envoy -n tanzu-system-ingress -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'.` #for CNAME, hostname need to end with .
   record_type="CNAME"
 else
   hostname=`kubectl get svc envoy -n tanzu-system-ingress -o jsonpath='{.status.loadBalancer.ingress[0].ip}'`
@@ -22,7 +22,7 @@ fi
 echo "hostname $hostname"
 echo "CLOUDDNS_HOSTED_ZONE $CLOUDDNS_HOSTED_ZONE"
 echo "ingress_fqdn $ingress_fqdn"
-
+echo "record_type $record_type"
 
 # Execute the change
 gcloud dns record-sets transaction start --zone $CLOUDDNS_HOSTED_ZONE
@@ -36,6 +36,6 @@ if [ ! -z "$existingDnsRecord" ]; then
 fi
 #Now Create new record
 # gcloud dns record-sets transaction start --zone $CLOUDDNS_HOSTED_ZONE
-gcloud dns record-sets transaction add --zone $CLOUDDNS_HOSTED_ZONE --name "${ingress_fqdn}" --type ${record_type} ${hostname} --ttl 300
+gcloud dns record-sets transaction add  "${hostname}" --zone $CLOUDDNS_HOSTED_ZONE --name "${ingress_fqdn}" --type ${record_type} --ttl 300
 gcloud dns record-sets transaction execute --zone $CLOUDDNS_HOSTED_ZONE
 

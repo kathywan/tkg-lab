@@ -21,7 +21,7 @@ source ./scripts/set-env.sh
 # Management Step 7
 ./scripts/generate-and-apply-dex-yaml.sh
 # Management Step 8
-./scripts/deploy-wavefront.sh $(yq r $PARAMS_YAML management-cluster.name)
+# ./scripts/deploy-wavefront.sh $(yq r $PARAMS_YAML management-cluster.name)
 
 # Shared Services Step 1
 ./scripts/deploy-workload-cluster.sh \
@@ -52,18 +52,18 @@ source ./scripts/set-env.sh
    $(yq r $PARAMS_YAML shared-services-cluster.name) \
    $(yq r $PARAMS_YAML shared-services-cluster.gangway-fqdn)
 # Shared Services Step 6
-./scripts/generate-and-apply-elasticsearch-kibana-yaml.sh
+# ./scripts/generate-and-apply-elasticsearch-kibana-yaml.sh
 # Shared Services Step 7
-./scripts/generate-and-apply-fluent-bit-yaml.sh $(yq r $PARAMS_YAML shared-services-cluster.name)
+# ./scripts/generate-and-apply-fluent-bit-yaml.sh $(yq r $PARAMS_YAML shared-services-cluster.name)
 # Shared Services Step 8
-./scripts/deploy-wavefront.sh $(yq r $PARAMS_YAML shared-services-cluster.name)
+# ./scripts/deploy-wavefront.sh $(yq r $PARAMS_YAML shared-services-cluster.name)
 # Shared Services Step 9
-./scripts/velero-no-schedule.sh $(yq r $PARAMS_YAML shared-services-cluster.name)
+# ./scripts/velero-no-schedule.sh $(yq r $PARAMS_YAML shared-services-cluster.name)
 
 # Management Step 9
-./scripts/generate-and-apply-fluent-bit-yaml.sh $(yq r $PARAMS_YAML management-cluster.name)
+# ./scripts/generate-and-apply-fluent-bit-yaml.sh $(yq r $PARAMS_YAML management-cluster.name)
 # Management Step 10
-./scripts/velero-no-schedule.sh $(yq r $PARAMS_YAML management-cluster.name)
+# ./scripts/velero-no-schedule.sh $(yq r $PARAMS_YAML management-cluster.name)
 
 # Workload Step 1
-./scripts/deploy-all-workload-cluster-components-clouddns.sh
+# ./scripts/deploy-all-workload-cluster-components-clouddns.sh

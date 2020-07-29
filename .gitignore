@@ -9,3 +9,4 @@ params.yaml
 generated/
 .DS_Store
 local-config/
+dns/tkg-aws-lab-record-sets-aws.json

@@ -1,0 +1,9 @@
+useHelm3: false
+allowNamespaceDiscovery: true
+ingress:
+  enabled: true
+  certManager: true
+  hostname: kubeapps.local
+  tls: true
+
+

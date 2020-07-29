@@ -1,4 +1,4 @@
-useHelm3: false
+useHelm3: true
 allowNamespaceDiscovery: true
 ingress:
   enabled: true

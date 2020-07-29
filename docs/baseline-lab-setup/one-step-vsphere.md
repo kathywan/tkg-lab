@@ -29,7 +29,7 @@ Ensure that your copy of `params.yaml` indicates `aws` as the IaaS.
 Now you can execute the following script to perform all of those tasks:
 
 ```bash
-./scripts/deploy-all-aws.sh
+./scripts/deploy-all-vsphere.sh
 ```
 
 >Note: This process should take about 30 minutes to complete.
